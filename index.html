@@ -122,13 +122,13 @@
         total: total
       };
 
-      fetch(SCRIPT_URL, {
+     fetch(SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         body: JSON.stringify(payload)
       })
-      .then(res => res.json())
-      .then(data => {
-        alert('สั่งซื้อสำเร็จ! รหัสคำสั่งซื้อของคุณคือ: ' + data.orderId);
+      .then(() => {
+        alert('สั่งซื้อสำเร็จ! ข้อมูลถูกบันทึกเรียบร้อยแล้ว');
         document.getElementById('orderForm').reset();
         calcTotal();
       })
