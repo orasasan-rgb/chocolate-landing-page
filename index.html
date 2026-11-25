@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craft Chocolate Bar - ช็อกโกแลตแท่งพรีเมียม</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50 text-stone-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-stone-900 text-amber-100 py-6 px-4 text-center shadow-md">
+    <h1 class="text-3xl font-bold tracking-wider">CACAO CRAFT THAILAND</h1>
+    <p class="text-sm text-amber-300 mt-1">ช็อกโกแลตคราฟต์แท้ 100% คัดสรรเมล็ดโกโก้คุณภาพ</p>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <!-- Product Section (2 SKUs) -->
+    <h2 class="text-2xl font-bold mb-6 text-center text-stone-800">เลือกช็อกโกแลตที่คุณชื่นชอบ</h2>
+    <div class="grid md:grid-cols-2 gap-6 mb-10">
+      
+      <!-- SKU 1 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden border border-amber-200">
+        <img src="./images/dark-choc.jpg" alt="Dark Chocolate 75%" class="w-full h-56 object-cover bg-stone-200">
+        <div class="p-5">
+          <span class="text-xs font-semibold bg-stone-800 text-white px-2 py-1 rounded">SKU: CHOC-DARK75</span>
+          <h3 class="text-xl font-bold mt-2">75% Single Origin Dark Chocolate</h3>
+          <p class="text-stone-600 text-sm mt-1">ดาร์กช็อกโกแลตเข้มข้น หวานน้อย หอมกลิ่นผลไม้ตระกูลเบอร์รี (ขนาด 80g)</p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-xl font-bold text-amber-700">฿180</span>
+            <div class="flex items-center space-x-2">
+              <label class="text-sm">จำนวน:</label>
+              <input type="number" id="sku1" value="0" min="0" onchange="calcTotal()" class="w-16 border rounded p-1 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKU 2 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden border border-amber-200">
+        <img src="./images/milk-choc.jpg" alt="Sea Salt Milk Chocolate" class="w-full h-56 object-cover bg-stone-200">
+        <div class="p-5">
+          <span class="text-xs font-semibold bg-amber-600 text-white px-2 py-1 rounded">SKU: CHOC-MILK01</span>
+          <h3 class="text-xl font-bold mt-2">Sea Salt Caramel Milk Chocolate</h3>
+          <p class="text-stone-600 text-sm mt-1">มิลค์ช็อกโกแลตนุ่มละมุน ตัดรสด้วยดอกเกลือทะเลและคาราเมล (ขนาด 80g)</p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-xl font-bold text-amber-700">฿160</span>
+            <div class="flex items-center space-x-2">
+              <label class="text-sm">จำนวน:</label>
+              <input type="number" id="sku2" value="0" min="0" onchange="calcTotal()" class="w-16 border rounded p-1 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Form -->
+    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-200">
+      <h2 class="text-xl font-bold mb-4 border-b pb-2">ข้อมูลจัดส่งสินค้า</h2>
+      <form id="orderForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium">ชื่อ-นามสกุล ผู้รับ</label>
+          <input type="text" id="custName" required class="w-full border rounded-lg p-2.5 mt-1" placeholder="เช่น สมชาย ใจดี">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">เบอร์โทรศัพท์</label>
+          <input type="tel" id="custPhone" required class="w-full border rounded-lg p-2.5 mt-1" placeholder="เช่น 0812345678">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">ที่อยู่จัดส่ง (พร้อมรหัสไปรษณีย์)</label>
+          <textarea id="custAddress" required rows="3" class="w-full border rounded-lg p-2.5 mt-1" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
+        </div>
+        
+        <div class="bg-amber-100 p-4 rounded-lg flex justify-between items-center">
+          <span class="font-bold text-lg">ยอดรวมทั้งสิ้น:</span>
+          <span id="totalPrice" class="text-2xl font-bold text-stone-900">฿0</span>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-stone-900 hover:bg-stone-800 text-amber-100 font-bold py-3 rounded-lg transition">
+          ยืนยันการสั่งซื้อ
+        </button>
+      </form>
+    </div>
+    
+    <div class="text-center mt-8">
+      <a href="admin.html" class="text-xs text-stone-400 underline">เข้าสู่ระบบหลังบ้าน (สำหรับแพ็คสินค้า)</a>
+    </div>
+  </main>
+
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxy3MEvU0J2fkgu5-ZQ2WVXBmwly8jueLpESLTsLpPeKh1NjFD78PGBUpNf4pKH5BM/exec'; // <-- วาง URL ของ Google Apps Script ตรงนี้
+
+    function calcTotal() {
+      const q1 = parseInt(document.getElementById('sku1').value) || 0;
+      const q2 = parseInt(document.getElementById('sku2').value) || 0;
+      const total = (q1 * 180) + (q2 * 160);
+      document.getElementById('totalPrice').innerText = '฿' + total;
+      return total;
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const q1 = parseInt(document.getElementById('sku1').value) || 0;
+      const q2 = parseInt(document.getElementById('sku2').value) || 0;
+      const total = calcTotal();
+
+      if (q1 === 0 && q2 === 0) {
+        alert('กรุณาเลือกสินค้าอย่างน้อย 1 ชิ้นครับ');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerText = 'กำลังบันทึกคำสั่งซื้อ...';
+
+      const payload = {
+        name: document.getElementById('custName').value,
+        phone: document.getElementById('custPhone').value,
+        address: document.getElementById('custAddress').value,
+        sku1: q1,
+        sku2: q2,
+        total: total
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert('สั่งซื้อสำเร็จ! รหัสคำสั่งซื้อของคุณคือ: ' + data.orderId);
+        document.getElementById('orderForm').reset();
+        calcTotal();
+      })
+      .catch(err => alert('เกิดข้อผิดพลาด: ' + err))
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerText = 'ยืนยันการสั่งซื้อ';
+      });
+    });
+  </script>
+</body>
+</html>
